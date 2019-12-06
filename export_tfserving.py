@@ -71,7 +71,7 @@ def main(_argv):
     t1 = time.time()
     outputs = infer(img)
     boxes, scores, classes, nums = outputs["yolo_nms_0"], outputs[
-        "yolo_nms_1"], outputs["yolo_nms_2"], outputs["yolo_nms_3"]
+        "yolo_nms_1_1"], outputs["yolo_nms_2_2"], outputs["yolo_nms_3_3"]
     t2 = time.time()
     logging.info('time: {}'.format(t2 - t1))
 
