@@ -25,22 +25,22 @@ def main():
     request.model_spec.signature_name = 'serving_default'
 
 
-# read image into numpy array
-img = cv2.imread(FLAGS.image).astype(np.float32)
-if img is None:
-    print('no image!')
-img = cv2.resize(img, (416, 416))
+    # read image into numpy array
+    img = cv2.imread(FLAGS.image).astype(np.float32)
+    if img is None:
+        print('no image!')
+    img = cv2.resize(img, (416, 416))
 
-# convert to tensor proto and make request
-# shape is in NHWC (num_samples x height x width x channels) format
-#  for j in range(10):
-#   print('-- ' + str(j) + ' --')
-for i in range(30):
+    # convert to tensor proto and make request
+    # shape is in NHWC (num_samples x height x width x channels) format
+    #  for j in range(10):
+    #   print('-- ' + str(j) + ' --')
     tt = time.time()
     tensor = tf.make_tensor_proto(img, shape=[1] + list(img.shape))
     request.inputs['input_1'].CopyFrom(tensor)
     resp = stub.Predict(request, 30.0)
     print('{}'.format((time.time() - tt) * 1000))
+
 if __name__ == '__main__':
     main()
 # img = cv2.imread('./data/people.jpg')
